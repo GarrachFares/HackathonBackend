@@ -4,6 +4,7 @@ import {
     BaseEntity,
     OneToOne,
     JoinColumn,
+    ManyToOne,
   } from 'typeorm'
 import { Land } from './land'
 import { User } from './user'
@@ -14,14 +15,11 @@ import { User } from './user'
     @PrimaryGeneratedColumn()
     id: number
   
-    @OneToOne(() => User, (modCandidat) => modCandidat.modRequest)
-    @JoinColumn()
+    
+    @ManyToOne(() => User, user  => user.modRequests)
     moderator: User
 
-    @OneToOne(() => Land, (land) => land.modRequest)
-    @JoinColumn()
+    @ManyToOne(() => Land, land  => land.modRequests)
     land: Land
-      modRequest: ModRequest
-    
     
   }

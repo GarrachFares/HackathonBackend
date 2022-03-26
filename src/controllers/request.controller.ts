@@ -19,11 +19,6 @@ export const getById: Controller = async (req, res) => {
 export const getOwnedByMe: Controller = async (req, res) => {
     try{
          const id = req.user.id
-        // const lands = await landService.getByOwnerId(id) 
-        // const landIds = lands.map(land=>land.id)
-        // console.log(landIds)
-        // const data = await service.getByLandIds(landIds)
-        // console.log(landIds)
         const data = await service.getOwnedById(id)
         res.json(data)
     }catch (e:any) {

@@ -91,10 +91,10 @@ import { Transaction } from './transaction'
     moderatedLand: Land
 
     //also modCandidat column
-    @OneToOne(() => ModRequest, (modReq) => modReq.moderator, {
+    @OneToMany(() => ModRequest, modReq => modReq.moderator, {
       cascade: true,
     })
-    modRequest: ModRequest
+    modRequests: Promise<ModRequest[]>
 
     @OneToMany(() => FeedBack, feedBack => feedBack.owner, {
       cascade: true,

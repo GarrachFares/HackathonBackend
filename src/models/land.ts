@@ -19,11 +19,13 @@ export class Land extends BaseEntity {
 
   @Column({
     type: "float",
+    nullable: true,
   })
   latitude: number;
 
   @Column({
     type: "float",
+    nullable: true,
   })
   longitude: number;
 
@@ -39,13 +41,15 @@ export class Land extends BaseEntity {
   })
   residents: Promise<User[]>;
 
-  @OneToOne(() => ModRequest, (modRequest) => modRequest.land, {
+  @OneToMany(() => ModRequest, modReq => modReq.land, {
     cascade: true,
+    nullable: true,
   })
-  modRequest: ModRequest;
+  modRequests: Promise<ModRequest[]>
 
   @OneToMany(() => Rent, (rent) => rent.land, {
     cascade: true,
+
   })
   rents: Promise<Rent[]>;
 }

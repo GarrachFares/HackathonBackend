@@ -9,7 +9,7 @@ export const create = (request:ModRequest) => {
 
 export const getAll = async () =>  ModRequest.find({
     relations: ['land','moderator'],
-    
+
 })
 
 export const getById = async (id: number) =>
@@ -21,7 +21,7 @@ export const getById = async (id: number) =>
 
 export const getOwnedById = async (id:any) =>
     ModRequest.find({
-        relations: ['land'],
+        relations: ['land','moderator'],
         where: {
             land: { 
               owner: {
@@ -32,16 +32,6 @@ export const getOwnedById = async (id:any) =>
     })
 
 
-export const getByLandIds = async (ids: any[]) =>
-getRepository(ModRequest).find({
-    where:{land : In(ids)}
-})
-
-
-// export const getByLandIds = async (ids: any[]) =>
-// getRepository(ModRequest).createQueryBuilder("request")
-// .where("request.land IN (:lands)", { lands: ids })
-// .getMany();
 
 
 export const deleteModRequest = async (id: number) => {
