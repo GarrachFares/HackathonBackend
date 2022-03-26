@@ -66,7 +66,7 @@ export const register:Controller = async (req, res:any) => {
         newUser.email = email
         newUser.password = password
         newUser.phone = phone
-        newUser.username = "username"//generate username
+        newUser.generateUsername()//generate username
         //crypt pass
         newUser.isActive= false//isActive things
         newUser.role = role // validate the enum
