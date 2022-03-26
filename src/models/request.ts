@@ -21,6 +21,7 @@ import { User } from './user'
     @OneToOne(() => Land, (land) => land.modRequest)
     @JoinColumn()
     land: Land
+      modRequest: ModRequest
     
     
   }
