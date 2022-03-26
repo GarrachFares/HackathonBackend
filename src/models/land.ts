@@ -19,10 +19,10 @@ import { User } from './user'
     id: number
   
     
-    @Column("double")
+    @Column()
     latitude: number
 
-    @Column("double")
+    @Column()
     longitude: number
   
 

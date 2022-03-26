@@ -13,17 +13,18 @@ export const getById: Controller = async (req, res) => {
   res.json(data)
 }
 
-export const createUser: Controller = async (req, res) => {
-    const {name,email,password,phone,role} = req.body
+export const create: Controller = async (req, res) => {
+    const {fullname,email,password,phone,role} = req.body
     let user = new User()
-    user.fullname = name
+    user.fullname = fullname
     user.email = email
     user.password = password
     user.phone = phone
-    //generate username
+    user.username = "username"//generate username
     //crypt pass
-    //isActive things
+    user.isActive= false//isActive things
     user.role = role // validate the enum
+    user.residentAtPriceOf = 100
     
     const data = await service.create(user)
     res.json(data)
