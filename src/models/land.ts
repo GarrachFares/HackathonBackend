@@ -30,8 +30,9 @@ import { User } from './user'
     owner: User
 
     
-    @OneToOne(() => User, (mod) => mod.moderatedLand)
+    @OneToOne(() => User, (mod) => mod.moderatedLand,{nullable:true})
     @JoinColumn()
+  
     moderator: User
     
     

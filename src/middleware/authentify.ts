@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-export const authentify = () => async(req : any ,res: any ,next:any ) =>{
+export const authentify = (role?: string) => async(req : any ,res: any ,next:any ) =>{
     try{
         const requestHeader = req.headers.authorization 
         if(!requestHeader) return res.status(401).send('Unauthorized')
@@ -10,6 +10,7 @@ export const authentify = () => async(req : any ,res: any ,next:any ) =>{
             }
 
             req.user = user;
+            if(role && req.user.role !== role) return res.status(403).send('Unauthorized')
             next();
         });
     }catch(e){
