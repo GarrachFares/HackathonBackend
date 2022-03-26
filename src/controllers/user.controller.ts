@@ -20,10 +20,10 @@ export const create: Controller = async (req, res) => {
     user.email = email
     user.password = password
     user.phone = phone
-    user.username = "username"//generate username
+    user.generateUsername()//generate username
     //crypt pass
-    user.isActive= false//isActive things
-    user.role = role // validate the enum
+    user.isActive= true//isActive landlord and moderator
+    user.role = 'MODERATOR' // validate the enum
     user.residentAtPriceOf = 100
     
     const data = await service.create(user)

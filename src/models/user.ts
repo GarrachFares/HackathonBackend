@@ -39,7 +39,13 @@ import { Transaction } from './transaction'
     @Column({
       type: 'text',
       })
-      username: string
+    username: string
+    
+    generateUsername() {  
+      //random number generator
+      const random = Math.floor(Math.random() * 1000000)
+      this.username = this.fullname + random
+    }
 
     @Column({
       type: 'text',
