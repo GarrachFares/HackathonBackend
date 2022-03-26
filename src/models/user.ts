@@ -24,10 +24,16 @@ import { Transaction } from './transaction'
     })
     role:string
     
-    @Column()
+    @Column({
+      nullable: true,
+    })
     fullname: string
 
-    @Column()
+    @Column(
+      {
+        nullable: true,
+      }
+    )
     phone: string
   
     @Column({
@@ -38,6 +44,7 @@ import { Transaction } from './transaction'
     //auto generated
     @Column({
       type: 'text',
+      nullable: true,
       })
     username: string
     
@@ -52,14 +59,18 @@ import { Transaction } from './transaction'
     })
     password: string
 
-    @Column()
+    @Column({
+      default: false,
+    })
     isActive: boolean //true for LANDLORD, MODERATOR
 
     
     @ManyToOne(() => Land, land  => land.residents)
     residentAt: Land
 
-    @Column()
+    @Column({
+      nullable: true,
+    })
     residentAtPriceOf: number  
 
     @OneToMany(() => Transaction, transaction => transaction.owner, {

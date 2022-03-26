@@ -13,6 +13,14 @@ export const getById: Controller = async (req, res) => {
   res.json(data)
 }
 
+export const getByToken: Controller = async (req, res) => {
+  let fullData = await service.getById(req.user.id)
+  //console.log(req.user , data)
+  const data = { ...fullData }
+  delete data.password
+  res.json(data)
+}
+
 export const create: Controller = async (req, res) => {
     const {fullname,email,password,phone,role} = req.body
     let user = new User()
