@@ -44,14 +44,12 @@ export const login:Controller = async (req, res:any) => {
 export const register:Controller = async (req, res:any) => {
     //Check if username and password are set
     let { fullname, email, password, phone} = req.body;
+    let passwordToCrypt = password
     if (!(fullname && email && password && phone)) {
           return res.status(400).send();
     } 
     try {
-        //Get user from database
         const userRepository = getRepository(User);
-        //let user: Account;
-        let doesPasswordMatch
         const user :any = await userRepository.findOne({ where: { email } })
         if(user){
             return res.status(401).send('user with this email already exists');
@@ -64,14 +62,16 @@ export const register:Controller = async (req, res:any) => {
         newUser.phone = phone
         newUser.generateUsername()//generate username
         //bcypt hash password
-        newUser.password = await bcrypt.hash(password, 10)
+        newUser.password = await bcrypt.hash(passwordToCrypt, 10)
         //crypt pass
         newUser.isActive= true//isActive things
         newUser.role = 'MODERATOR' // validate the enum
         
-        //save user
-        const data = await userRepository.save(newUser)
-        res.json(data)
+        //reove the password
+        let data = await userRepository.save(newUser)
+        let {password,...rest} = data
+        
+        res.json(rest)
     } catch (error) {
       res.status(400).send('something went wrong');
     }
