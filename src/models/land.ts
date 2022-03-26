@@ -1,53 +1,51 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    BaseEntity,
-    Column,
-    OneToMany,
-    OneToOne,
-    ManyToOne,
-    JoinColumn,
-  } from 'typeorm'
-import { Rent } from './rent'
-import { ModRequest } from './request'
-import { User } from './user'
-  
-  
-  @Entity()
-  export class Land extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number
-  
-    
-    @Column()
-    latitude: number
+  Entity,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  Column,
+  OneToMany,
+  OneToOne,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { Rent } from "./rent";
+import { ModRequest } from "./request";
+import { User } from "./user";
 
-    @Column()
-    longitude: number
-  
+@Entity()
+export class Land extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @ManyToOne(() => User, owner  => owner.ownedLands)
-    owner: User
+  @Column({
+    type: "float",
+  })
+  latitude: number;
 
-    
-    @OneToOne(() => User, (mod) => mod.moderatedLand,{nullable:true})
-    @JoinColumn()
-  
-    moderator: User
-    
-    
-    @OneToMany(() => User, user => user.residentAt, {
-        cascade: true,
-    })
-    residents: Promise<User[]>
-    
-    @OneToOne(() => ModRequest, (modRequest) => modRequest.land, {
-        cascade: true,
-    })
-    modRequest: ModRequest
+  @Column({
+    type: "float",
+  })
+  longitude: number;
 
-    @OneToMany(() => Rent, rent => rent.land, {
-        cascade: true,
-      })
-    rents: Promise<Rent[]>
-  }
+  @ManyToOne(() => User, (owner) => owner.ownedLands)
+  owner: User;
+
+  @OneToOne(() => User, (mod) => mod.moderatedLand, { nullable: true })
+  @JoinColumn()
+  moderator: User;
+
+  @OneToMany(() => User, (user) => user.residentAt, {
+    cascade: true,
+  })
+  residents: Promise<User[]>;
+
+  @OneToOne(() => ModRequest, (modRequest) => modRequest.land, {
+    cascade: true,
+  })
+  modRequest: ModRequest;
+
+  @OneToMany(() => Rent, (rent) => rent.land, {
+    cascade: true,
+  })
+  rents: Promise<Rent[]>;
+}
