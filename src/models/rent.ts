@@ -3,6 +3,7 @@ import {
     PrimaryGeneratedColumn,
     BaseEntity,
     ManyToOne,
+    Column
   } from 'typeorm'
 import { Land } from './land'
 
@@ -13,5 +14,16 @@ import { Land } from './land'
 
     @ManyToOne(() => Land, land  => land.rents)
     land: Land
-    
+
+    @Column({
+      type: 'text',
+      nullable: true,
+    })
+    title: string
+
+    @Column({
+      type: 'text',
+      nullable: true,
+    })
+    content: string    
   }
