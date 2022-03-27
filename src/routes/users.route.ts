@@ -9,6 +9,7 @@ const router = Router()
 router.get('/' ,users.getAll)
 router.get('/getme' ,authentify(),users.getByToken)
 router.get('/myresedences',authentify('MODERATOR'),users.getByBossId)
+router.get('/mymods',authentify('LANDLORD'),users.getMyMods)
 router.get('/:id' ,users.getById)
 
 

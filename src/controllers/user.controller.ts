@@ -21,6 +21,13 @@ export const getByBossId: Controller = async (req, res) => {
   res.json(data)
 }
 
+export const getMyMods: Controller = async (req, res) => {
+  const id = req.user.id
+  const data = await service.getMyMods(id as any)
+  res.json(data)
+}
+
+
 export const getByToken: Controller = async (req, res) => {
   let fullData = await service.getById(req.user.id)
   //console.log(req.user , data)

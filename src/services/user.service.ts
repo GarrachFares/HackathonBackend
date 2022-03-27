@@ -29,6 +29,18 @@ User.find({
   },
 })
 
+export const getMyMods = async (id: number) =>
+User.find({
+  relations:['moderatedLand','moderatedLand.owner'],
+  where: {
+    moderatedLand:{
+      owner:{
+        id
+      }
+    }
+  },
+})
+
 
 export const deleteUser = async (id: number) => {
   const user = await User.findOne({ where: { id } })
