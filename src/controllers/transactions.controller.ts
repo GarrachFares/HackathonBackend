@@ -59,7 +59,7 @@ export const getMissingForModId: Controller = async (req, res) => {
 
         var filteredArray  = allUsers.filter(function(allUsers_el){
         return data.filter(function(data_el){
-            return data_el.id == allUsers_el.id;
+            return data_el.owner.id == allUsers_el.id;
         }).length == 0
         });
 
