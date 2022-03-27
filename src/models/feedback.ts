@@ -1,3 +1,4 @@
+import { string } from 'joi'
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -16,7 +17,9 @@ import { User } from './user'
     @ManyToOne(() => User, owner  => owner.feedBacks)
     owner: User
 
-    @Column()
+    @Column({
+      type: 'text',
+    })
     content: string
     
     
