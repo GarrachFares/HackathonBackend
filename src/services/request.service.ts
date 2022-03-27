@@ -14,6 +14,7 @@ export const getAll = async () =>  ModRequest.find({
 
 export const getById = async (id: number) =>
   ModRequest.findOne({
+    relations: ['land','moderator'],
     where: {
       id,
     },
@@ -42,4 +43,14 @@ export const deleteModRequest = async (id: number) => {
   }
 
   await modRequest.remove()
+}
+
+export const kill = async (id: number) => {
+    const modRequest = await ModRequest.findOne({ where: { id } })
+    
+    if (!modRequest) {
+        throw new Error('mod request not found')
+    }
+    
+    await modRequest.remove()
 }

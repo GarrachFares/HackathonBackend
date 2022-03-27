@@ -30,6 +30,16 @@ export const getById = async (id: number) =>
         ['moderator'] // can add  owner 
     
   })
+
+  export const getByModId = async (id: number) =>
+  Land.findOne({
+    where: {
+      moderator: id,
+    },
+    relations: 
+        ['moderator'] // can add  owner 
+    
+  })
   
   export const getFreeModLands =async () => {
     const lands = await Land.find({

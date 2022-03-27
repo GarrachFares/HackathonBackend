@@ -6,6 +6,8 @@ const router = Router()
 
 router.get('/' ,requests.getAll) //only in dev
 router.get('/my' ,authentify('LANDLORD'),requests.getOwnedByMe) 
+router.post('/my/:id/accept' ,authentify('LANDLORD'),requests.accept)
+router.post('/my/:id/delete' ,authentify('LANDLORD'),requests.kill) 
 router.get('/:id' ,requests.getById)//only in dev
 
 

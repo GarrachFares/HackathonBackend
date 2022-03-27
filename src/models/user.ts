@@ -56,6 +56,7 @@ import { Transaction } from './transaction'
 
     @Column({
       type: 'text',
+      nullable: true,
     })
     password: string
 
@@ -93,7 +94,8 @@ import { Transaction } from './transaction'
     //also modCandidat column
     @OneToMany(() => ModRequest, modReq => modReq.moderator, {
       cascade: true,
-    })
+      nullable: true,
+    },)
     modRequests: Promise<ModRequest[]>
 
     @OneToMany(() => FeedBack, feedBack => feedBack.owner, {

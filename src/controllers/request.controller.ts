@@ -89,3 +89,36 @@ export const createByToken: Controller = async (req, res) => {
     }
     
 }
+export  const accept : Controller = async (req, res) => {
+    try{
+        const id = req.params.id
+        const data = await service.getById(id)
+        if(!data){
+            throw new Error('request not found')
+        }
+        const land = await landService.getById(data.land.id)
+        const mod = await userService.getById(data.moderator.id)
+        if(!land){
+            throw new Error('land not found')
+        }
+        if(!mod){
+            throw new Error('moderator not found')
+        }
+        land.moderator = mod
+        land.save()
+        await service.kill(id)
+        res.json(land)
+    }catch (e:any) {
+        res.status(400).json(e.message)
+    }
+}
+
+export  const kill : Controller = async (req, res) => {
+    try{
+        const id = req.params.id
+        const data = await service.kill(id)
+        res.json(data)
+    }catch (e:any) {
+        res.status(400).json(e.message)
+    }
+}

@@ -7,10 +7,13 @@ export const create = (user:User) => {
 }
 
 
-export const getAll = async () =>  User.find({})
+export const getAll = async () =>  User.find({
+    relations:['residentAt']
+})
 
 export const getById = async (id: number) =>
   User.findOne({
+    relations:['residentAt'],
     where: {
       id,
     },
