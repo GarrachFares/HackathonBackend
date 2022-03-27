@@ -5,6 +5,7 @@ import auth from './auth.route'
 import requests from './request.route'
 import rents from './rent.route'
 import feedbacks from './feedback.route'
+import transactions from './transactions.route'
 
 const router = Router()
 router.use('/users', users)
@@ -13,6 +14,7 @@ router.use('/lands', lands)
 router.use('/requests', requests)
 router.use('/rents', rents)
 router.use('/feedbacks', feedbacks)
+router.use('/transactions', transactions)
 
 
 export default router
