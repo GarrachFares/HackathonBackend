@@ -16,7 +16,7 @@ import { User } from './user'
     
     @Column()
     month: number
-
+    
     @Column()
     year: number
     

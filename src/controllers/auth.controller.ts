@@ -32,7 +32,7 @@ export const login:Controller = async (req, res:any) => {
         const token = jwt.sign(
                 {...user},
                 process.env.SECRET || 'SECRET',
-              { expiresIn: "1h" }
+              { expiresIn: "5h" }
             );
         console.log(token)
         res.json({"token" :token})

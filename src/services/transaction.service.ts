@@ -1,14 +1,14 @@
-import { FeedBack } from '../models/feedback'
+import { Transaction } from '../models/transaction'
 
 
 
-export const getAll = async () =>  FeedBack.find({
+export const getAll = async () =>  Transaction.find({
     relations: 
         ['owner'] 
 })
 
 export const getById = async (id: number) =>
-  FeedBack.findOne({
+  Transaction.findOne({
     where: {
       id,
     },
@@ -19,7 +19,7 @@ export const getById = async (id: number) =>
 
 
 export const getByOwnerId = async (id: number) =>
-FeedBack.find({
+Transaction.find({
 where: {
     owner :{
         id
@@ -31,7 +31,7 @@ relations:
 })
 
 export const getForModId = async (id: number) =>
-FeedBack.find({
+Transaction.find({
 where: {
     owner :{
         residentAt:{
@@ -47,11 +47,11 @@ relations:
 })
 
 export const kill = async (id: number) => {
-  const feedBack = await FeedBack.findOne({ where: { id } })
+  const transaction = await Transaction.findOne({ where: { id } })
 
-  if (!feedBack) {
-    throw new Error('feedback not found')
+  if (!transaction) {
+    throw new Error('transaction not found')
   }
 
-  await feedBack.remove()
+  await transaction.remove()
 }
