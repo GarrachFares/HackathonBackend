@@ -12,12 +12,22 @@ export const getAll = async () =>  User.find({
 })
 
 export const getById = async (id: number) =>
-  User.findOne({
-    relations:['residentAt'],
-    where: {
-      id,
-    },
-  })
+User.findOne({
+  relations:['residentAt'],
+  where: {
+    id,
+  },
+})
+
+export const getByBossId = async (id: number) =>
+User.find({
+  relations:['residentAt','residentAt.moderator'],
+  where: {
+    residentAt:{
+      moderator : id
+    }
+  },
+})
 
 
 export const deleteUser = async (id: number) => {

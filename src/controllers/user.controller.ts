@@ -15,6 +15,12 @@ export const getById: Controller = async (req, res) => {
   res.json(data)
 }
 
+export const getByBossId: Controller = async (req, res) => {
+  const id = req.user.id
+  const data = await service.getByBossId(id as any)
+  res.json(data)
+}
+
 export const getByToken: Controller = async (req, res) => {
   let fullData = await service.getById(req.user.id)
   //console.log(req.user , data)
