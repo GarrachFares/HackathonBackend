@@ -46,6 +46,24 @@ relations:
 
 })
 
+export const getNotMissingForModId = async (id: number,month:number,year:number) =>
+Transaction.find({
+where: {
+    owner :{
+        residentAt:{
+            moderator :{
+                id
+            }
+        }
+    }
+    ,month:month
+    ,year:year
+},
+relations: 
+    ['owner','owner.residentAt','owner.residentAt.moderator'] 
+
+})
+
 export const kill = async (id: number) => {
   const transaction = await Transaction.findOne({ where: { id } })
 

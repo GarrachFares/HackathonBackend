@@ -46,6 +46,30 @@ export const getForModId: Controller = async (req, res) => {
     
 }
 
+export const getMissingForModId: Controller = async (req, res) => {
+    try{
+        const id = req.user.id
+        const {year,month} = req.body
+        const allUsers = await userService.getByBossId(id)
+        const data = await service.getNotMissingForModId(id as any,month,year)
+
+        var array = [{id :1, name :"test1"},{id :2, name :"test2"},{id :3, name :"test3"},{id :4, name :"test4"}];
+
+        var anotherOne = [{id :2, name :"test2"}, {id :4, name :"test4"}];
+
+        var filteredArray  = allUsers.filter(function(allUsers_el){
+        return data.filter(function(data_el){
+            return data_el.id == allUsers_el.id;
+        }).length == 0
+        });
+
+        res.json(filteredArray)
+    }catch(e:any){
+        res.status(400).json(e.message)
+    }
+    
+}
+
 
 
 export const create: Controller = async (req, res) => {
